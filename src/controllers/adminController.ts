@@ -283,6 +283,78 @@ export const getAllPatients = async (req: Request, res: Response): Promise<void>
   }
 };
 
+export const updatePatient = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const { 
+      nombre, 
+      apellido, 
+      cedula, 
+      fecha_nacimiento, 
+      telefono, 
+      direccion, 
+      tipo_sangre, 
+      alergias, 
+      condiciones_medicas, 
+      contacto_emergencia_nombre, 
+      contacto_emergencia_telefono 
+    } = req.body;
+
+    const patient = await Paciente.findByPk(id);
+    if (!patient) {
+      res.status(404).json({
+        success: false,
+        message: 'Paciente no encontrado'
+      });
+      return;
+    }
+
+    // Verificar si la nueva cédula ya existe en otro paciente
+    if (cedula && cedula !== patient.cedula) {
+      const existingPatient = await Paciente.findOne({ 
+        where: { 
+          cedula,
+          id: { [Op.ne]: id }
+        } 
+      });
+      if (existingPatient) {
+        res.status(409).json({
+          success: false,
+          message: 'Ya existe otro paciente con esta cédula'
+        });
+        return;
+      }
+    }
+
+    await patient.update({
+      nombre: nombre || patient.nombre,
+      apellido: apellido || patient.apellido,
+      cedula: cedula || patient.cedula,
+      fecha_nacimiento: fecha_nacimiento || patient.fecha_nacimiento,
+      telefono: telefono || patient.telefono,
+      direccion: direccion || patient.direccion,
+      tipo_sangre: tipo_sangre || patient.tipo_sangre,
+      alergias: alergias || patient.alergias,
+      condiciones_medicas: condiciones_medicas || patient.condiciones_medicas,
+      contacto_emergencia_nombre: contacto_emergencia_nombre || patient.contacto_emergencia_nombre,
+      contacto_emergencia_telefono: contacto_emergencia_telefono || patient.contacto_emergencia_telefono
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Paciente actualizado exitosamente',
+      data: patient
+    });
+
+  } catch (error) {
+    console.error('Error al actualizar paciente:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error interno del servidor'
+    });
+  }
+};
+
 // ==================== GESTIÓN DE QUIRÓFANOS ====================
 
 export const createQuirofano = async (req: Request, res: Response): Promise<void> => {

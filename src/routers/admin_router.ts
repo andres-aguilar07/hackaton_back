@@ -10,6 +10,7 @@ import {
   // Gestión de pacientes
   registerPatient,
   getAllPatients,
+  updatePatient,
   
   // Gestión de quirófanos
   createQuirofano,
@@ -59,6 +60,9 @@ router.post('/patients', registerPatient);
 
 // Obtener todos los pacientes
 router.get('/patients', getAllPatients);
+
+// Actualizar información de un paciente específico
+router.put('/patients/:id', updatePatient);
 
 // ==================== RUTAS DE GESTIÓN DE QUIRÓFANOS ====================
 

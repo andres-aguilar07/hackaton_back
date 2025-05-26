@@ -163,6 +163,50 @@ Esta documentación describe todos los endpoints disponibles para el panel admin
 
 **GET** `/patients`
 
+### Actualizar Paciente
+
+**PUT** `/patients/:id`
+
+```json
+{
+  "nombre": "María Elena",
+  "apellido": "González Pérez",
+  "cedula": "87654321",
+  "fecha_nacimiento": "1985-03-15",
+  "telefono": "3009876543",
+  "direccion": "Calle 123 #45-67, Apt 101",
+  "tipo_sangre": "O+",
+  "alergias": "Penicilina, Látex",
+  "condiciones_medicas": "Hipertensión controlada, Diabetes tipo 2",
+  "contacto_emergencia_nombre": "Carlos González",
+  "contacto_emergencia_telefono": "3001111111"
+}
+```
+
+**Respuesta:**
+```json
+{
+  "success": true,
+  "message": "Paciente actualizado exitosamente",
+  "data": {
+    "id": 1,
+    "nombre": "María Elena",
+    "apellido": "González Pérez",
+    "cedula": "87654321",
+    "fecha_nacimiento": "1985-03-15",
+    "telefono": "3009876543",
+    "direccion": "Calle 123 #45-67, Apt 101",
+    "tipo_sangre": "O+",
+    "alergias": "Penicilina, Látex",
+    "condiciones_medicas": "Hipertensión controlada, Diabetes tipo 2",
+    "contacto_emergencia_nombre": "Carlos González",
+    "contacto_emergencia_telefono": "3001111111",
+    "created_at": "2024-01-10T10:30:00.000Z",
+    "updated_at": "2024-01-15T14:20:00.000Z"
+  }
+}
+```
+
 ---
 
 ## 🏢 Gestión de Quirófanos
