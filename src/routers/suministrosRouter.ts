@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getStock, getStockEnUso, actualizarStock, entregarSuministros, registrarEntrega, asignarStockCirugia, getStockAsignadoCirugia, agregarStockAdicional, getNotificaciones, marcarNotificacionLeida, registrarEsterilizacion, getHistorialEsterilizacion, getProcedimientosConcurrentes } from '../controllers/suministrosController';
+import { actualizarStock, agregarStockAdicional, asignarStockCirugia, entregarSuministros, getHistorialEsterilizacion, getNotificaciones, getProcedimientosConcurrentes, getStock, getStockAsignadoCirugia, getStockEnUso, marcarNotificacionLeida, registrarEntrega, registrarEsterilizacion } from '../controllers/suministrosController';
 
 const router = Router();
 
