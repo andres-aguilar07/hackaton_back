@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import { connectDatabase } from './database';
 import authRouter from './routers/auth_router';
 import adminRouter from './routers/admin_router';
+import enfermeraJefeRouter from './routers/enfermeraJefeRouter';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,6 +29,9 @@ app.use('/api/v1/auth', authRouter);
 
 // Rutas administrativas
 app.use('/api/v1/admin', adminRouter);
+
+// Rutas de enfermera jefe
+app.use('/api/v1/enfermera_jefe', enfermeraJefeRouter);
 
 // Inicializar servidor
 const startServer = async () => {
