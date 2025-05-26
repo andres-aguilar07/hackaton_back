@@ -1,5 +1,4 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
-import Usuario from './Usuario';
 
 @Table({
   tableName: 'roles',
@@ -40,6 +39,6 @@ export default class Role extends Model {
   deleted_at?: Date;
 
   // Associations
-  @HasMany(() => Usuario)
-  usuarios?: Usuario[];
+  @HasMany(() => require('./Usuario').default)
+  usuarios?: any[];
 } 

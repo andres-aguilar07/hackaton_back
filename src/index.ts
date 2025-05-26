@@ -1,5 +1,9 @@
+import 'reflect-metadata';
 import express from 'express';
 import morgan from 'morgan';
+import { connectDatabase } from './database';
+import authRouter from './routers/auth_router';
+import adminRouter from './routers/admin_router';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,12 +16,34 @@ app.use(express.json());
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-  res.send('¡Hola mundo con TypeScript y Express!');
+  res.json({
+    success: true,
+    message: '¡API del Sistema de Gestión Hospitalaria funcionando correctamente!',
+    version: '1.0.0'
+  });
 });
 
-// app.use('/api/v1/auth', authRoutes);
+// Rutas de autenticación
+app.use('/api/v1/auth', authRouter);
 
+// Rutas administrativas
+app.use('/api/v1/admin', adminRouter);
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+// Inicializar servidor
+const startServer = async () => {
+  try {
+    // Conectar a la base de datos
+    await connectDatabase();
+    
+    // Iniciar servidor
+    app.listen(port, () => {
+      console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
+      console.log(`📚 Documentación de API disponible en http://localhost:${port}/api/v1`);
+    });
+  } catch (error) {
+    console.error('❌ Error al iniciar el servidor:', error);
+    process.exit(1);
+  }
+};
+
+startServer();

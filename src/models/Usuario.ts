@@ -1,18 +1,6 @@
 import { Table, Model, Column, DataType, ForeignKey, BelongsTo, HasMany, HasOne } from 'sequelize-typescript';
 import Role from './Role';
 
-import Notificacion from './Notificacion';
-import SesionUsuario from './SesionUsuario';
-import CirugiaStockAsignado from './CirugiaStockAsignado';
-import CirugiaPersonal from './CirugiaPersonal';
-import ConteoInstrumentacion from './ConteoInstrumentacion';
-import EntidadSuministradora from './EntidadSuministradora';
-import EntregaStock from './EntregaStock';
-import Esterilizacion from './Esterilizacion';
-import Incidente from './Incidente';
-import Medico from './Medico';
-import SolicitudCirugia from './SolicitudCirugia';
-
 @Table({
   tableName: 'usuarios',
   timestamps: false,
@@ -99,39 +87,40 @@ export default class Usuario extends Model {
   @BelongsTo(() => Role)
   rol!: Role;
 
-  @HasOne(() => Medico)
-  medico?: Medico;
+  // Las siguientes asociaciones se agregarán cuando los modelos estén disponibles
+  // @HasOne(() => Medico)
+  // medico?: Medico;
 
-  @HasMany(() => EntidadSuministradora, 'responsable_id')
-  entidades_suministradoras?: EntidadSuministradora[];
+  // @HasMany(() => EntidadSuministradora, 'responsable_id')
+  // entidades_suministradoras?: EntidadSuministradora[];
 
-  @HasMany(() => CirugiaPersonal, 'medico_id')
-  cirugias_personal?: CirugiaPersonal[];
+  // @HasMany(() => CirugiaPersonal, 'medico_id')
+  // cirugias_personal?: CirugiaPersonal[];
 
-  @HasMany(() => CirugiaStockAsignado, 'asignado_por_id')
-  stock_asignado?: CirugiaStockAsignado[];
+  // @HasMany(() => CirugiaStockAsignado, 'asignado_por_id')
+  // stock_asignado?: CirugiaStockAsignado[];
 
-  @HasMany(() => ConteoInstrumentacion, 'realizado_por_id')
-  conteos_realizados?: ConteoInstrumentacion[];
+  // @HasMany(() => ConteoInstrumentacion, 'realizado_por_id')
+  // conteos_realizados?: ConteoInstrumentacion[];
 
-  @HasMany(() => EntregaStock, 'entregado_por_id')
-  entregas_realizadas?: EntregaStock[];
+  // @HasMany(() => EntregaStock, 'entregado_por_id')
+  // entregas_realizadas?: EntregaStock[];
 
-  @HasMany(() => EntregaStock, 'recibido_por_id')
-  entregas_recibidas?: EntregaStock[];
+  // @HasMany(() => EntregaStock, 'recibido_por_id')
+  // entregas_recibidas?: EntregaStock[];
 
-  @HasMany(() => SolicitudCirugia, 'solicitado_por_id')
-  solicitudes_realizadas?: SolicitudCirugia[];
+  // @HasMany(() => SolicitudCirugia, 'solicitado_por_id')
+  // solicitudes_realizadas?: SolicitudCirugia[];
 
-  @HasMany(() => Esterilizacion, 'responsable_id')
-  esterilizaciones_realizadas?: Esterilizacion[];
+  // @HasMany(() => Esterilizacion, 'responsable_id')
+  // esterilizaciones_realizadas?: Esterilizacion[];
 
-  @HasMany(() => Incidente, 'reportado_por_id')
-  incidentes_reportados?: Incidente[];
+  // @HasMany(() => Incidente, 'reportado_por_id')
+  // incidentes_reportados?: Incidente[];
 
-  @HasMany(() => Notificacion)
-  notificaciones?: Notificacion[];
+  // @HasMany(() => Notificacion)
+  // notificaciones?: Notificacion[];
 
-  @HasMany(() => SesionUsuario)
-  sesiones?: SesionUsuario[];
+  // @HasMany(() => SesionUsuario)
+  // sesiones?: SesionUsuario[];
 } 
