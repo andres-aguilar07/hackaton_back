@@ -13,6 +13,7 @@ import Esterilizacion from '../models/Esterilizacion';
 import TipoCirugia from '../models/TipoCirugia';
 import Quirofano from '../models/Quirofano';
 import Medico from '../models/Medico';
+import { Request, Response } from 'express';
 
 // ==================== GESTIÓN DE STOCK ====================
 
@@ -173,36 +174,26 @@ export const actualizarStock = async (req: any, res: any) => {
 export const getStockByEntidad = async (req: any, res: any) => {
   try {
     const { id } = req.params;
-
-    // Verificar que la entidad existe
-    const entidad = await EntidadSuministradora.findByPk(id);
-    if (!entidad) {
-      return res.status(404).json({
-        success: false,
-        message: 'Entidad suministradora no encontrada'
-      });
-    }
-
-    // Obtener todo el stock de la entidad con sus items y categorías
+    
     const stock = await Stock.findAll({
-      where: { entidad_suministradora_id: id },
-      include: [
-        {
-          model: Item,
-          include: [{ model: CategoriaItem }]
-        }
-      ]
+      where: {
+        entidad_suministradora_id: id
+      },
+      include: [{
+        model: Item,
+        attributes: ['nombre', 'descripcion', 'categoria']
+      }]
     });
 
-    res.json({
+    return res.status(200).json({
       success: true,
       data: stock
     });
   } catch (error) {
-    console.error('Error al obtener stock de la entidad:', error);
-    res.status(500).json({
+    console.error('Error al obtener stock por entidad:', error);
+    return res.status(500).json({
       success: false,
-      message: 'Error al obtener stock de la entidad'
+      message: 'Error al obtener el stock por entidad suministradora'
     });
   }
 };

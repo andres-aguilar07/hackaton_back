@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { actualizarStock, agregarStockAdicional, asignarStockCirugia, entregarSuministros, getHistorialEsterilizacion, getNotificaciones, getProcedimientosConcurrentes, getStock, getStockAsignadoCirugia, getStockEnUso, marcarNotificacionLeida, registrarEntrega, registrarEsterilizacion } from '../controllers/suministrosController';
+import { actualizarStock, agregarStockAdicional, asignarStockCirugia, entregarSuministros, getHistorialEsterilizacion, getNotificaciones, getProcedimientosConcurrentes, getStock, getStockAsignadoCirugia, getStockEnUso, marcarNotificacionLeida, registrarEntrega, registrarEsterilizacion, getStockByEntidad } from '../controllers/suministrosController';
 
 const router = Router();
 
@@ -16,6 +16,14 @@ const router = Router();
  * }
  */
 router.get('/stock', getStock);
+
+/**
+ * @route   GET /api/v1/suministros/stock/entidad/:id
+ * @desc    Obtener stock por ID de entidad suministradora
+ * @access  Central, Farmacia
+ * @param   {string} id - ID de la entidad suministradora
+ */
+router.get('/stock/entidad/:id', getStockByEntidad);
 
 /**
  * @route   GET /api/v1/suministros/stock/en-uso
