@@ -6,6 +6,7 @@ import authRouter from './routers/auth_router';
 import adminRouter from './routers/admin_router';
 import enfermeraJefeRouter from './routers/enfermeraJefeRouter';
 import suministrosRouter from './routers/suministrosRouter';
+import instrumentadorRouter from './routers/instrumentadorRouter';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -36,6 +37,9 @@ app.use('/api/v1/enfermera_jefe', enfermeraJefeRouter);
 
 // Rutas de suministros (Central y Farmacia)
 app.use('/api/v1/suministros', suministrosRouter);
+
+// Rutas de instrumentador
+app.use('/api/v1/instrumentador', instrumentadorRouter);
 
 // Inicializar servidor
 const startServer = async () => {
