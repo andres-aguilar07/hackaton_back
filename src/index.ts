@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
   res.send('¡Hola mundo con TypeScript y Express!');
 });
 
+// app.use('/api/v1/auth', authRoutes);
+
+
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
