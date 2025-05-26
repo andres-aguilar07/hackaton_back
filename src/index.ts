@@ -5,6 +5,7 @@ import { connectDatabase } from './database';
 import authRouter from './routers/auth_router';
 import adminRouter from './routers/admin_router';
 import enfermeraJefeRouter from './routers/enfermeraJefeRouter';
+import suministrosRouter from './routers/suministrosRouter';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,6 +33,9 @@ app.use('/api/v1/admin', adminRouter);
 
 // Rutas de enfermera jefe
 app.use('/api/v1/enfermera_jefe', enfermeraJefeRouter);
+
+// Rutas de suministros (Central y Farmacia)
+app.use('/api/v1/suministros', suministrosRouter);
 
 // Inicializar servidor
 const startServer = async () => {
